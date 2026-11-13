@@ -1,0 +1,83 @@
+{
+  "errno": 0,
+  "errtag": 0,
+  "msg": "success",
+  "data": {
+    "id": 1001701,
+    "name": "BML 2026 演唱会",
+    "sale_flag_number": 2,
+    "sale_flag": "在售",
+    "status": 1,
+    "is_sale": 1,
+    "sale_start": 1750000000,
+    "sale_end": 1751000000,
+    "current_time": 1750100000,
+    "count_down": 0,
+    "price_low": 12800,
+    "price_high": 138000,
+    "salable_price_low": 12800,
+    "salable_price_high": 88000,
+    "hotProject": true,
+    "wish_info": { "count": 45231 },
+    "merchant": null,
+    "mid": 0,
+    "screen_list": [
+      {
+        "id": 220001,
+        "name": "6月21日 12:00",
+        "start_time": 1750500000,
+        "sale_start": 1750000000,
+        "sale_end": 1751000000,
+        "saleFlag": { "number": 2, "display_name": "在售" },
+        "clickable": true,
+        "ticket_list": [
+          {
+            "id": 330001,
+            "desc": "大会员提前抢-S级",
+            "price": 138000,
+            "num": 5,
+            "static_limit": { "num": 8 },
+            "saleStart": 1750000000,
+            "sale_flag": { "number": 2, "display_name": "在售" },
+            "clickable": true,
+            "less_vt": 1
+          },
+          {
+            "id": 330002,
+            "desc": "VIP票(含礼包)",
+            "price": 88000,
+            "num": 0,
+            "saleStart": 1750000000,
+            "sale_flag": { "number": 4, "display_name": "已售罄" },
+            "clickable": false
+          }
+        ]
+      },
+      {
+        "id": 220002,
+        "name": "6月22日 12:00",
+        "start_time": 1750600000,
+        "saleFlag": { "number": 4, "display_name": "已售罄" },
+        "clickable": false,
+        "ticket_list": [
+          {
+            "id": 330003,
+            "desc": "普通票-D级",
+            "price": 12800,
+            "num": 0,
+            "sale_flag": { "number": 4, "display_name": "暂时售罄" },
+            "clickable": false
+          },
+          {
+            "id": 330004,
+            "desc": "学生票",
+            "price": null,
+            "num": 0,
+            "sale_flag": null,
+            "clickable": null
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+/* HeroUI v3 styles bundle Tailwind v4 base/components/utilities + default theme
+   tokens. @heroui-pro/react/css adds the Pro component layer (Timeline, Navbar,
+   KPI, DataGrid, …) and MUST come after @heroui/styles. The sky theme (imported
+   into the theme layer) re-skins those tokens to the Default palette. Light/dark is
+   toggled via the .dark / [data-theme] attributes on <html> (see lib/theme.ts +
+   the anti-flash script in index.html). */
+@import "tailwindcss";
+@import "@heroui/styles";
+@import "@heroui-pro/react/css";
+@import "./themes/sky.css" layer(theme);
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-variant-ligatures: no-contextual;
+}

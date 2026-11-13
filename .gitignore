@@ -1,0 +1,58 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+out/
+.next/
+.turbo/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Caches
+.cache/
+*.tsbuildinfo
+.vite/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Go workspace
+go.work.sum
+
+# Secrets & credentials — never commit
+*.kubeconfig
+kubeconfig
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+# k8s Secret manifests with real values (create out-of-band via kubectl);
+# safe-to-commit SealedSecrets (*-sealedsecret.yaml) are NOT matched
+*-secret.yaml
+*.secret.yaml
+secrets.yaml
+secrets.env
+# per-host node deploy inventories / env (SSH targets, NODE_TOKEN)
+deploy/**/.env
+deploy/**/hosts*
+deploy/**/inventory*
+deploy/**/*.secret
+

@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fnmdp-web
+  namespace: fnmdp
+  labels:
+    app: fnmdp-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fnmdp-web
+  template:
+    metadata:
+      labels:
+        app: fnmdp-web
+    spec:
+      # nodeSelector:
+      #   node-role: compute   # optional
+      containers:
+        - name: web
+          image: ghcr.io/wittf/fnmdp-web:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8897
+          readinessProbe:
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 200m
+              memory: 64Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fnmdp-web
+  namespace: fnmdp
+  labels:
+    app: fnmdp-web
+spec:
+  selector:
+    app: fnmdp-web
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

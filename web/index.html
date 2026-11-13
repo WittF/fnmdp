@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN" class="dark" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060606" />
+    <title>fnmdp · 票务监控</title>
+    <script>
+      // Anti-flash: set the theme from localStorage before first paint.
+      (function () {
+        try {
+          var t = localStorage.getItem("fnmdp.theme");
+          if (t !== "light" && t !== "dark") t = "dark";
+          var el = document.documentElement;
+          el.classList.toggle("dark", t === "dark");
+          el.classList.toggle("light", t === "light");
+          el.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

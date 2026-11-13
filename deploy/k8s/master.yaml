@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fnmdp-master
+  namespace: fnmdp
+  labels:
+    app: fnmdp-master
+spec:
+  replicas: 1            # single replica — scheduler/registry/L3 state is in-memory (locked)
+  strategy:
+    type: Recreate       # in-memory state, single owner — avoid two masters polling at once
+  selector:
+    matchLabels:
+      app: fnmdp-master
+  template:
+    metadata:
+      labels:
+        app: fnmdp-master
+    spec:
+      # Replace the image with your own build; add imagePullSecrets for a private registry.
+      # nodeSelector:
+      #   node-role: compute   # optional: pin next to your ingress nodes
+      containers:
+        - name: master
+          image: ghcr.io/wittf/fnmdp-master:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: fnmdp-master-config   # committed: non-sensitive defaults
+            - configMapRef:
+                name: fnmdp-master-conn      # out-of-band: PG/Valkey endpoints (see README)
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fnmdp-secrets
+                  key: pg-password
+            - name: VALKEY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fnmdp-secrets
+                  key: valkey-password
+            - name: NODE_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: fnmdp-secrets
+                  key: node-token
+            - name: ADMIN_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: fnmdp-secrets
+                  key: admin-token
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: "1"
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fnmdp-master
+  namespace: fnmdp
+  labels:
+    app: fnmdp-master
+spec:
+  selector:
+    app: fnmdp-master
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

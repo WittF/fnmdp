@@ -1,0 +1,33 @@
+# Non-secret, non-sensitive master runtime defaults only.
+#
+# Connection endpoints (PG host/user/db, Valkey addr) are NOT here — this is a
+# public repo. They live in a `fnmdp-master-conn` ConfigMap created out-of-band
+# at bootstrap (see deploy/README.md), alongside the `fnmdp-secrets` Secret.
+# master.yaml pulls both via envFrom.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fnmdp-master-config
+  namespace: fnmdp
+data:
+  LISTEN_ADDR: ":8080"
+  # Scheduling defaults (see master/internal/config/config.go). Mall is the
+  # primary source now, so hot projects can run faster while each node remains
+  # serialized at roughly 1 request/sec.
+  DEFAULT_INTERVAL_MS: "30000"
+  HOT_INTERVAL_MS: "3000"
+  DEFAULT_REPLICA_FACTOR: "1"
+  # Hot projects fan out across all healthy nodes (divided among hot projects).
+  # 0 = no cap (use every node). Set e.g. "12" to cap each hot project's
+  # replicas, trading refresh speed for lower total request volume to bilibili.
+  HOT_MAX_REPLICA: "60"
+  NODE_BUDGET_RPS: "1.0"
+  MIN_INTERVAL_MS: "1000"
+  SOFT_BACKOFF_MS: "1000"
+  HARD_COOLDOWN_MS: "600000"
+  HEARTBEAT_TIMEOUT: "36s"
+  # Managed Postgres poolers often cap sessions low; keep the master pool below
+  # that ceiling so maintenance connections still fit.
+  PGMAXCONNS: "4"
+  # INITIAL_PROJECTS intentionally empty — projects added via admin API.
+  INITIAL_PROJECTS: ""

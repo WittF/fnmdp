@@ -1,0 +1,7 @@
+ALTER TABLE sku_state
+    ADD COLUMN IF NOT EXISTS num integer NOT NULL DEFAULT 0,
+    ADD COLUMN IF NOT EXISTS limit_num integer NOT NULL DEFAULT 0;
+
+ALTER TABLE state_events
+    ADD COLUMN IF NOT EXISTS old_num integer NOT NULL DEFAULT 0,
+    ADD COLUMN IF NOT EXISTS new_num integer NOT NULL DEFAULT 0;

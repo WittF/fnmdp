@@ -1,0 +1,252 @@
+/* Default theme — mapped onto HeroUI v3 semantic token names.
+   Values mirror the supplied Default token set.
+
+   Light/dark is toggled via the .dark / [data-theme] attributes on <html>
+   (see lib/theme.ts + the anti-flash script in index.html), so we keep the same
+   :root/.dark selector mechanism the previous fnmdp.css used.
+
+   Semantic status colors (success/warning/danger) and the fixed --grid-* domain
+   colors are preserved so "可售" green / "已售罄" red stay recognizable — the
+   accent is reserved for emphasis, never status. */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  --radius: 8px;
+  --field-radius: 12px;
+  --border-width-field: 0px;
+  --field-border-width: 0px;
+
+  --backdrop: rgba(0, 0, 0, 0.5);
+  --background: #f5f5f5;
+  --background-secondary: #ebebeb;
+  --background-tertiary: #e1e1e1;
+  --background-inverse: #18181b;
+  --foreground: #18181b;
+  --muted: #727272;
+
+  --overlay: #ffffff;
+  --overlay-foreground: #18181b;
+
+  --surface: #ffffff;
+  --surface-foreground: #18181b;
+  --surface-hover: #eaeaea;
+  --surface-secondary: #efefef;
+  --surface-secondary-foreground: #18181b;
+  --surface-tertiary: #eaeaea;
+  --surface-tertiary-foreground: #18181b;
+
+  --accent: #0485f7;
+  --accent-foreground: #fcfcfc;
+  --accent-hover: #3592f9;
+  --accent-soft: rgba(4, 133, 247, 0.15);
+  --accent-soft-foreground: #1e63ae;
+  --accent-soft-hover: rgba(4, 133, 247, 0.2);
+
+  --default: #ebebeb;
+  --default-foreground: #18181b;
+  --default-hover: #e1e1e2;
+  --default-soft: rgba(235, 235, 235, 0.5);
+  --default-soft-foreground: #18181b;
+  --default-soft-hover: rgba(235, 235, 235, 0.6);
+
+  --success: #17c964;
+  --success-foreground: #18181b;
+  --success-hover: #21b55d;
+  --success-soft: rgba(23, 201, 100, 0.15);
+  --success-soft-foreground: #2b7745;
+  --success-soft-hover: rgba(23, 201, 100, 0.2);
+  --warning: #f5a524;
+  --warning-foreground: #18181b;
+  --warning-hover: #dc962a;
+  --warning-soft: rgba(245, 165, 36, 0.15);
+  --warning-soft-foreground: #855f2e;
+  --warning-soft-hover: rgba(245, 165, 36, 0.2);
+  --danger: #ff383c;
+  --danger-foreground: #fcfcfc;
+  --danger-hover: #ff5551;
+  --danger-soft: rgba(255, 56, 60, 0.15);
+  --danger-soft-foreground: #a43433;
+  --danger-soft-hover: rgba(255, 56, 60, 0.2);
+
+  --border: #dedede;
+  --border-secondary: #c6c6c7;
+  --border-tertiary: #a8a8a9;
+  --separator: #e4e4e4;
+  --separator-secondary: #d8d8d8;
+  --separator-tertiary: #cdcdce;
+
+  --focus: #0485f7;
+  --link: #18181b;
+  --scrollbar: #d4d4d4;
+  --segment: #ffffff;
+  --segment-foreground: #18181b;
+
+  --field-background: #ffffff;
+  --field-background-hover: #f9f9f9;
+  --field-focus: #ffffff;
+  --field-border: #dedede;
+  --field-border-focus: #ababac;
+  --field-border-hover: #c7c7c8;
+  --field-foreground: #18181b;
+  --field-placeholder: #727272;
+
+  --black: #000000;
+  --eclipse: #18181b;
+  --snow: #fcfcfc;
+  --white: #ffffff;
+  --chart-1: #0038a5;
+  --chart-2: #005fce;
+  --chart-3: #0485f7;
+  --chart-4: #42acff;
+  --chart-5: #6cd4ff;
+  --surface-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 0 1px 0 rgba(0, 0, 0, 0.06);
+  --overlay-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.06), 0 -6px 12px 0 rgba(0, 0, 0, 0.03), 0 14px 28px 0 rgba(0, 0, 0, 0.08);
+  --field-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 0 1px 0 rgba(0, 0, 0, 0.06);
+
+  --container: 1500px;
+}
+
+.dark,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --radius: 8px;
+  --field-radius: 12px;
+  --border-width-field: 0px;
+  --field-border-width: 0px;
+
+  --backdrop: rgba(0, 0, 0, 0.6);
+  --background: #060606;
+  --background-secondary: #0d0d0d;
+  --background-tertiary: #141414;
+  --background-inverse: #fcfcfc;
+  --foreground: #fcfcfc;
+  --muted: #a0a0a0;
+
+  --overlay: #181818;
+  --overlay-foreground: #fcfcfc;
+
+  --surface: #181818;
+  --surface-foreground: #fcfcfc;
+  --surface-hover: #272727;
+  --surface-secondary: #232323;
+  --surface-secondary-foreground: #fcfcfc;
+  --surface-tertiary: #272727;
+  --surface-tertiary-foreground: #fcfcfc;
+
+  --accent: #0485f7;
+  --accent-foreground: #fcfcfc;
+  --accent-hover: #3592f9;
+  --accent-soft: rgba(4, 133, 247, 0.12);
+  --accent-soft-foreground: #61a8fc;
+  --accent-soft-hover: rgba(4, 133, 247, 0.16);
+
+  --default: #272727;
+  --default-foreground: #fcfcfc;
+  --default-hover: #2e2e2e;
+  --default-soft: rgba(39, 39, 39, 0.5);
+  --default-soft-foreground: #fcfcfc;
+  --default-soft-hover: rgba(39, 39, 39, 0.6);
+
+  --success: #17c964;
+  --success-foreground: #18181b;
+  --success-hover: #21b55d;
+  --success-soft: rgba(23, 201, 100, 0.12);
+  --success-soft-foreground: #74d88f;
+  --success-soft-hover: rgba(23, 201, 100, 0.16);
+  --warning: #f7b750;
+  --warning-foreground: #18181b;
+  --warning-hover: #dea54c;
+  --warning-soft: rgba(247, 183, 80, 0.12);
+  --warning-soft-foreground: #f9cb86;
+  --warning-soft-hover: rgba(247, 183, 80, 0.16);
+  --danger: #db3b3e;
+  --danger-foreground: #fcfcfc;
+  --danger-hover: #e15451;
+  --danger-soft: rgba(219, 59, 62, 0.15);
+  --danger-soft-foreground: #eb7872;
+  --danger-soft-hover: rgba(219, 59, 62, 0.2);
+
+  --border: #292929;
+  --border-secondary: #434343;
+  --border-tertiary: #5c5c5c;
+  --separator: #222222;
+  --separator-secondary: #343434;
+  --separator-tertiary: #3c3c3c;
+
+  --focus: #0485f7;
+  --link: #fcfcfc;
+  --scrollbar: #a0a0a0;
+  --segment: #474747;
+  --segment-foreground: #fcfcfc;
+
+  --field-background: #181818;
+  --field-background-hover: #1c1c1c;
+  --field-focus: #181818;
+  --field-border: #292929;
+  --field-border-focus: #535353;
+  --field-border-hover: #3b3b3b;
+  --field-foreground: #fcfcfc;
+  --field-placeholder: #a0a0a0;
+
+  --black: #000000;
+  --eclipse: #18181b;
+  --snow: #fcfcfc;
+  --white: #ffffff;
+  --chart-1: #0038a5;
+  --chart-2: #005fce;
+  --chart-3: #0485f7;
+  --chart-4: #42acff;
+  --chart-5: #6cd4ff;
+  --surface-shadow: 0 0 0 0 transparent inset;
+  --overlay-shadow: 0 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+  --field-shadow: 0 0 0 0 transparent inset;
+}
+
+/* Domain status-grid colors — fixed hues across themes so a "可售" green and a
+   "已售罄" red stay recognizable regardless of light/dark or the pink accent.
+   Consumed by StatusGrid via var(). */
+:root {
+  --grid-presale: hsl(152 58% 40%);
+  --grid-available: hsl(145 55% 48%);
+  --grid-soldout: hsl(0 72% 56%);
+  --grid-coming: hsl(45 93% 55%);
+  --grid-suspended: hsl(220 5% 48%);
+  --grid-nodata: hsl(220 4% 30%);
+}
+
+@theme inline {
+  /* Latin via Inter; CJK via the user's system fonts (PingFang/YaHei/Hiragino/Noto
+     CJK) — we deliberately do NOT ship an 11MB Noto Sans SC webfont. "Noto Sans SC"
+     stays last so a locally-installed copy is still honored without any download. */
+  --font-sans: InterVariable, Inter, "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", "Noto Sans CJK SC", "Noto Sans SC", system-ui, sans-serif;
+  --radius: var(--radius);
+  --radius-field: var(--field-radius);
+  --shadow-surface: var(--surface-shadow);
+  --shadow-overlay: var(--overlay-shadow);
+  --shadow-field: var(--field-shadow);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-grid-presale: var(--grid-presale);
+  --color-grid-available: var(--grid-available);
+  --color-grid-soldout: var(--grid-soldout);
+  --color-grid-coming: var(--grid-coming);
+  --color-grid-suspended: var(--grid-suspended);
+  --color-grid-nodata: var(--grid-nodata);
+}
+
+@font-face {
+  font-family: InterVariable;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/static/InterVariable.woff2") format("woff2");
+}
+

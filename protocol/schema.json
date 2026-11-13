@@ -1,0 +1,99 @@
+{
+  "version": 8,
+  "comment": "Canonical message schema for fnmdp. Single source of truth. Both Go (shared/protocol) and TS (web/src/protocol) hand-written types are checked against this by consistency tests. Every message carries at least `type` (the WebSocket discriminator) and `version`. Bump `version` on any breaking change.",
+  "severities": ["critical", "notable", "info", "ops"],
+  "rate_kinds": ["soft_limited", "hard_blocked"],
+  "event_types": [
+    "sku_restock",
+    "sku_onsale",
+    "sku_added",
+    "sku_soldout",
+    "sku_price_change",
+    "sku_threshold_change",
+    "sku_low_stock",
+    "sku_removed",
+    "screen_onsale",
+    "screen_soldout",
+    "screen_added",
+    "screen_removed",
+    "day_soldout",
+    "project_hot_on",
+    "project_hot_off",
+    "project_onsale",
+    "project_presale",
+    "project_soldout",
+    "project_window_open",
+    "project_price_band_change",
+    "project_status_change",
+    "wish_milestone",
+    "risk_412",
+    "risk_429",
+    "node_online",
+    "node_offline",
+    "monitor_added",
+    "monitor_removed"
+  ],
+  "messages": {
+    "register": {
+      "direction": "node_to_master",
+      "fields": ["type", "version", "node_id", "node_name", "region", "capabilities"]
+    },
+    "heartbeat": {
+      "direction": "node_to_master",
+      "fields": ["type", "version", "node_id", "ts", "in_flight", "soft_limited", "hard_blocked"]
+    },
+    "poll_result": {
+      "direction": "node_to_master",
+      "fields": ["type", "version", "node_id", "project_id", "source", "server_ts", "fetched_at", "diff", "project", "screens"]
+    },
+    "rate_event": {
+      "direction": "node_to_master",
+      "fields": ["type", "version", "node_id", "project_id", "status_code", "kind", "sec_request_id", "ts"]
+    },
+    "assign": {
+      "direction": "master_to_node",
+      "fields": ["type", "version", "node_id", "assignments"]
+    },
+    "assign_delta": {
+      "direction": "master_to_node",
+      "fields": ["type", "version", "node_id", "added", "removed"]
+    },
+    "config": {
+      "direction": "master_to_node",
+      "fields": ["type", "version", "min_interval_ms", "soft_backoff_ms", "hard_cooldown_ms", "user_agent", "keepalive_ms"]
+    },
+    "snapshot": {
+      "direction": "master_to_frontend",
+      "fields": ["type", "version", "server_ts", "projects", "nodes"]
+    },
+    "state_update": {
+      "direction": "master_to_frontend",
+      "fields": ["type", "version", "project_id", "screen_id", "sku_id", "flag", "flag_text", "clickable", "price_fen", "num", "limit_num", "server_ts"]
+    },
+    "event": {
+      "direction": "master_to_frontend",
+      "fields": ["type", "version", "event_type", "severity", "project_id", "screen_id", "sku_id", "old", "new", "price_fen", "flag_text", "node_id", "details", "server_ts"]
+    },
+    "node_status": {
+      "direction": "master_to_frontend",
+      "fields": ["type", "version", "node_id", "node_name", "region", "online", "in_flight", "soft_limited", "hard_blocked", "last_seen", "skew_ms"]
+    }
+  },
+  "definitions": {
+    "fingerprint": {
+      "fields": ["flag", "clickable", "price_fen", "num"]
+    },
+    "assignment": {
+      "fields": ["project_id", "phase", "phase_mod", "interval_ms"]
+    },
+    "sku_diff": {
+      "fields": ["screen_id", "sku_id", "desc", "flag_text", "limit_num", "old", "new"]
+    },
+    "project_meta": {
+      "fields": ["name", "flag", "flag_text", "hot", "wish_count", "price_low", "price_high", "salable_low", "salable_high", "status", "is_sale", "sale_start", "sale_end", "count_down", "server_ts"]
+    },
+    "screen_diff": {
+      "fields": ["screen_id", "name", "start_time", "flag", "flag_text", "clickable", "sale_start", "sale_end", "removed"]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+# Per-node collector + self-updater. Runs on each collector host.
+# MASTER_URL / NODE_ID / NODE_NAME / NODE_TOKEN are supplied via an .env file written by
+# deploy-nodes.sh (never committed). Replace the image with your own build; if
+# your registry is private, add a `docker login` step and a watchtower config
+# with credentials.
+services:
+  node:
+    image: ghcr.io/wittf/fnmdp-node:latest
+    container_name: fnmdp-node
+    restart: always
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    environment:
+      MASTER_URL: "${MASTER_URL:?set MASTER_URL, e.g. wss://fnmdp.example.com/ingest}"
+      NODE_ID: "${NODE_ID}"
+      NODE_NAME: "${NODE_NAME}"
+      REGION: "${REGION:-unknown}"
+      NODE_TOKEN: "${NODE_TOKEN}"
+
+  # Polls ghcr every 60s; pulls + restarts fnmdp-node when :latest moves.
+  # --label-enable scopes it to the node container only.
+  watchtower:
+    image: containrrr/watchtower
+    container_name: fnmdp-watchtower
+    restart: always
+    environment:
+      # The deprecated containrrr image's docker client negotiates API v1.25,
+      # which newer daemons reject (min v1.40). Pin a supported version.
+      DOCKER_API_VERSION: "1.44"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 60 --cleanup --label-enable
